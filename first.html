@@ -12,7 +12,7 @@
          
         var testV = 1; 
          
-        var pass1 = prompt('请输入密码:',''); 
+        var pass1 = prompt('密码为我的名字:',''); 
          
         while (testV < 3) { 
          
@@ -20,7 +20,7 @@
          
         history.go(-1); 
          
-        if (pass1 == "9404") { 
+        if (pass1 == "朱人平") { 
          
         alert('密码正确,真棒!'); 
          
@@ -69,6 +69,79 @@
     <br>
     <br>
     <br>
+    <br>
+    <h2 <p style="background-color:#FFFF00">
+        留言板
+        </p></h2>
+    
+
+    <textarea id="memo" cols="60" rows="10"></textarea>
+    
+    <input type="button" value="发布" onclick="saveStorage('memo')" />
+    
+    <input type="button" value="清空" onclick="clearStorage('msg')" />
+    
+    <hr />
+    
+    <p id="msg"></p>
+    
+    <script type="text/javascript">
+    
+        function saveStorage(id) {
+    
+            var data = document.getElementById(id).value;
+    
+            var time = new Date().getTime();
+    
+            localStorage.setItem(time,data);
+    
+            console.log("数据已保存");
+    
+            loadStorage('msg');
+    
+        }
+    
+     
+    
+        function loadStorage(id) {
+    
+            var result = '<table border="1">';
+    
+            for(var i = 0; i < localStorage.length; i++) {
+    
+                var kes = localStorage.key(i);
+    
+                var value = localStorage.getItem(kes);
+    
+                var date = new Date();
+    
+                date.setTime(kes);
+    
+                var datestr = date.toGMTString();
+    
+                result += '<tr><td>' + value + '</td><td>' + datestr + '</td></tr>'
+    
+            }
+    
+            result += '</table>';
+    
+    var target = document.getElementById(id);
+    
+            target.innerHTML = result;
+    
+        }
+    
+     
+    
+        function clearStorage() {
+    
+            localStorage.clear();
+    
+            console.log("清除完毕");
+    
+        }
+    
+    </script>
     <br>
     <br>
     <br>
